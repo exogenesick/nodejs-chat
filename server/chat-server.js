@@ -31,6 +31,8 @@ var ChatServer = function (io) {
 
             if (username === self.users[i].username && email === self.users[i].email) {
                 this.emit('authenticate', {code: 1, response: {message: "Success"}});
+                self.users[i].socket = this;
+                self.broadcastUsersList(this);
                 return;
             }
 

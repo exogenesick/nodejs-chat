@@ -8,7 +8,7 @@ app.use(express.static(path.join(__dirname, '../client')));
 
 var server = http.createServer(app);
 var io = socketio.listen(server);
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 8090;
 
 server.listen(port, function() {
     console.log('Server listening on ' + port);
