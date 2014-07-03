@@ -1,5 +1,5 @@
 var socket = null,
-    author = null;
+    username = null;
 
 $(document).ready(function () {
     socket = io();
@@ -13,12 +13,12 @@ $(document).ready(function () {
 });
 
 function onConnect () {
-    console.log('connected');
+    $('#signinForm').fadeIn('slow', function () {});
 }
 
 function onAuthenticate (response) {
     if (1 === response.code || 2 === response.code) {
-        author = $('#username').val();
+        username = $('#username').val();
 
         $('#signinForm').fadeOut('slow', function () {
             $('#chatRoom').fadeIn('slow', function () {
@@ -27,8 +27,18 @@ function onAuthenticate (response) {
 
                 socket.emit("users");
 
+                $("#message").bind("keypress", function(e) {
+                    var code = e.keyCode || e.which;
+                    if(code == 13) {
+                        $( "#sendMessageButton" ).trigger("click");
+                    }
+                });
+
                 $("#sendMessageButton").on("click", function () {
-                    socket.emit("message", author, $("#message").val());
+                    if (0 < $("#message").val().length) {
+                        socket.emit("message", username, $("#message").val());
+                        $("#message").val("");
+                    }
                 });
             });
         });
@@ -46,7 +56,6 @@ function onMessage (message) {
 }
 
 function onUsers (users) {
-    console.log(users);
     $("#users").html('');
     $("#users").append('<a href="#" class="list-group-item active">Users online</a>');
 
