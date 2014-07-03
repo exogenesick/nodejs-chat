@@ -5,12 +5,13 @@
     "main": "server/app.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "postinstall": "rm ./client/js/jquery; cd ./client/js/; ln -s ./../../node_modules/jquery/dist jquery; cd ./../../; rm ./client/js/socket.io; cd ./client/js/; ln -s ./../../node_modules/socket.io"
+        "postinstall": "rm ./client/js/jquery; cd ./client/js/; ln -s ./../../node_modules/jquery/dist jquery; cd ./../../; rm ./client/js/socket.io; cd ./client/js/; ln -s ./../../node_modules/socket.io; cd ./../../; rm ./client/bootstrap; cd ./client; ln -s ./../node_modules/bootstrap/dist bootstrap"
     },
     "dependencies": {
         "socket.io": "1.0.6",
         "express": "4.4.5",
-        "jquery": "*"
+        "jquery": "*",
+        "bootstrap": "3.2.0"
     },
     "repository": "",
     "author": "Krzysztof Pająk",
